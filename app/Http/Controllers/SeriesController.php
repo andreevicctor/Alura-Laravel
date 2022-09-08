@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SeriesFormRequest;
 use App\Models\Serie;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,7 @@ class SeriesController extends Controller
         return view('series.create');
     }
 
-    public function store(Request $request)
+    public function store(SeriesFormRequest $request)
     {
         $serie = Serie::create($request->all()); // o ::create já retorna a model criada
 //      Serie::create($request->only(['nome'])); traz somente os campos do only(['campo1','campo2'])
@@ -35,7 +36,7 @@ class SeriesController extends Controller
     }
 
     // /series/{series}
-    public function update(Serie $series, Request $request)
+    public function update(Serie $series, SeriesFormRequest $request)
     {
         $series->fill($request->all()); // atualiza todos os dados enviado no request (mass assignment)
         $series->save();
