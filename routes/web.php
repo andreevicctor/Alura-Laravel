@@ -20,9 +20,13 @@ Route::get('/', function () {
 // utilizando o Route::resource para seguir a implementação da documentação
 Route::resource('/series', SeriesController::class)->except(['show']);
 
-//Route::delete('/series/destroy/{serie}', [SeriesController::class, 'destroy'])->name('series.destroy');
 // Route::controller(SeriesController::class)->group(function () {
 //     Route::get('/series', 'index')->name('series.index');
 //     Route::get('/series/create', 'create')->name('series.create');
-//     Route::post('/series/salvar', 'store')->name('series.store');
+//     Route::post('/series/store', 'store')->name('series.store');
+//     Route::get('/series/{$series}/edit', 'edit')->name('series.edit');
+//     Route::post('/series/{$series}', 'update')->name('series.update'); @method PUT
+//     Route::post('/series/{$series}', 'destroy')->name('series.destroy'); @method DELETE
 // });
+// -- outra forma:
+// Route::delete('/series/destroy/{serie}', [SeriesController::class, 'destroy'])->name('series.destroy');

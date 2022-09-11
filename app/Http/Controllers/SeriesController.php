@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SeriesFormRequest;
 use App\Models\Serie;
-use Illuminate\Http\Request;
 
 class SeriesController extends Controller
 {
     public function index()
     {
-        $series = Serie::query()->orderBy('nome')->get();
+        $series = Serie::all();
         $mensagemSucesso = session('mensagem.sucesso');
         return view('series.index')->with('series', $series)->with('mensagemSucesso', $mensagemSucesso);
     }
@@ -32,6 +31,7 @@ class SeriesController extends Controller
     // /series/{series}/edit
     public function edit(Serie $series)
     {
+        dd($series->temporadas);
         return view('series.edit')->with('series', $series);
     }
 
