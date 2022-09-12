@@ -8,14 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Season extends Model
 {
     use HasFactory;
+    protected $fillable = ['number'];
 
-    public function series()
+    public function series() // funcao de relacionamento com a model Series
     {
-//      Uma temporada pertence a uma serie
-        return $this->belongsTo(Serie::class);
+//      Uma temporada pertence a uma Serie
+        return $this->belongsTo(Series::class);
     }
 
-    public function episodes()
+    public function episodes() // funcao de relacionamento com a model Episode
     {
 //      Uma temporada possui varios episodios
         return $this->hasMany(Episode::class);
