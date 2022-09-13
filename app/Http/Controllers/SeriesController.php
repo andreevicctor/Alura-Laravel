@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SeriesFormRequest;
-use App\Models\Episode;
-use App\Models\Season;
 use App\Models\Series;
-use Illuminate\Support\Facades\DB;
+use App\Repositories\SeriesRepository;
 
 class SeriesController extends Controller
 {
+    public function __construct(private SeriesRepository $repository)
+    {    
+    }
+
     public function index()
     {
         $series = Series::all();
@@ -24,31 +26,8 @@ class SeriesController extends Controller
 
     public function store(SeriesFormRequest $request)
     {
-        $serie = DB::transaction(function () use ($request) {
-            $serie = Series::create($request->all()); // o ::create já retorna a model criada
-            $seasons = [];
-            for ($i = 1; $i <= $request->seasonsQty; $i++) {
-                $seasons[] = [
-                    'series_id' => $serie->id,
-                    'number' => $i
-                ];
-            }
-            Season::insert($seasons);
-    
-            $episodes = [];
-            foreach($serie->seasons as $season) {
-                for ($j = 1; $j <= $request->episodesPerSeason; $j++) {
-                    $episodes[] = [
-                        'season_id' => $season->id,
-                        'number' => $j
-                    ];
-                }
-            }
-            Episode::insert($episodes);
+        $serie = $this->repository->add($request);
 
-            return $serie;
-        });
-        
 //      Series::create($request->only(['nome'])); traz somente os campos do only(['campo1','campo2'])
 //      Series::create($request->except(['_token'])); traz todos os campos exceto os informados no array
 //      to_route e a melhor maneira para redirecionar
