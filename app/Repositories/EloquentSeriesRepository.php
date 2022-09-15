@@ -7,7 +7,11 @@ use App\Http\Requests\SeriesFormRequest;
 use App\Models\Episode;
 use App\Models\Season;
 use Illuminate\Support\Facades\DB;
-
+/**
+ * Essa classe é uma classe de repositório do ORM Eloquent.
+ * Isso significa que vai ser uma classe que vai lidar com os detalhes de banco de dados, 
+ * então, toda responsabilidade de tratar detalhes do banco de dados pode ser inserido nessa classe.
+ */
 class EloquentSeriesRepository implements SeriesRepository
 {
     public function add(SeriesFormRequest $request): Series

@@ -8,8 +8,23 @@ use App\Repositories\SeriesRepository;
 
 class SeriesController extends Controller
 {
+    /**
+     * Assim, agora estamos recebendo um repositório por parâmetro e salvando como uma propriedade da classe
+     * O repositório é criado diretamente pelo Laravel pelo service container, e como temos essa propriedade 
+     * já criada, podemos usar ela em todos os métodos.
+     */
     public function __construct(private SeriesRepository $repository)
-    {    
+    {
+    /**
+     * Inversão de dependência. Ao invés de depender de algo concreto, dependemos de uma abstração, que é a 
+     * interface de repositório SeriesRepository.
+     * O que acontece agora é que esperamos algum repositório, pode ser usando o Eloquente, o PDO, MongoDB, 
+     * em memória ou Doctrine, o que for. Para o SeriesController isso não importa, o que importa é que seja 
+     * alguma classe que possua o método add, que receba os dados da requisição, $request, e de volta uma série 
+     * criada, Series;, e é exatamente isso que temos em SeriesController.php na parte do código 
+     * $serie = $this->repository->add($request);
+     * O SeriesRepositoryProvider trata de ligar a interface SeriesRepository a implementação que queremos
+     */
     }
 
     public function index()
