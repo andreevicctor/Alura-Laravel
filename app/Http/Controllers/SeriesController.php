@@ -25,6 +25,7 @@ class SeriesController extends Controller
      * $serie = $this->repository->add($request);
      * O SeriesRepositoryProvider trata de ligar a interface SeriesRepository a implementação que queremos
      */
+        $this->middleware('autenticador')->except('index');
     }
 
     public function index()

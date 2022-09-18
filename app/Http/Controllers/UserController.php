@@ -16,6 +16,9 @@ class UserController
 
     public function store(Request $request)
     {
+        $request->validate([
+            'password' => 'required|confirmed|min:6'
+        ]);
         $data = $request->except(['_token']);
         $data['password'] = Hash::make($data['password']);
 
