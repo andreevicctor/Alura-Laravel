@@ -5,7 +5,6 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SeasonsController;
 use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\UserController;
-use App\Http\Middleware\Autenticador;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,7 +35,7 @@ Route::middleware('autenticador')->group(function () {
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'store'])->name('signin');
-Route::get('/logout', [LoginController::class, 'destroy'])->name('logout');
+Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
 Route::get('/register', [UserController::class, 'create'])->name('users.create');
 Route::post('/register', [UserController::class, 'store'])->name('users.store');
